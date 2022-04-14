@@ -16,7 +16,12 @@ public class ThreadExample {
 		else {
 			int extra = numPrints%threads;
 			for(int i = 1; i <= threads; i++) {
-				HelloWorld thread = new HelloWorld("Thread " + i, (numPrints/threads) + (extra-- > 0 ? 1 : 0));
+				int numPrints = numPrints / threads;
+				if (extra > 0) {
+					numprints++;
+					extra--;
+				}
+				HelloWorld thread = new HelloWorld("Thread " + i, numPrints);
 				thread.start();
 			}
 		}
