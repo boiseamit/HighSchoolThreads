@@ -29,14 +29,17 @@ public class ThreadExample {
 	}
 	
 	public static void printResults(long startTime, int threads, int numPrints) {
-		Runtime.getRuntime().addShutdownHook(new Thread() {
-			public void run() {
-				long endTime = System.nanoTime();
-				double elaspedTime = (double) (endTime - startTime) / 1_000_000_000;
-				String results = new DecimalFormat("0.00").format(elaspedTime);
-				System.out.println("Took " + threads + " threads " + results + " seconds to print " + numPrints + "x");
+		while (Thread.activeCount() > 1) {
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
 			}
-		});
+		}
+		long endTime = System.nanoTime();
+		double elaspedTime = (double) (endTime - startTime) / 1_000_000_000;
+		String results = new DecimalFormat("0.00").format(elaspedTime);
+		System.out.println("Took " + threads + " threads " + results + " seconds to print " + numPrints + "x");
 	}
 	public static void printWithNoThreads(int numPrints) throws InterruptedException {
 		for(int i = 0; i < numPrints; i++) {
