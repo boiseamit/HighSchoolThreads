@@ -5,27 +5,27 @@ import java.util.List;
 public class ThreadExample {
 
 	public static void main(String[] args) throws InterruptedException {
-		int numPrints = Integer.parseInt(args[0]);
+		int totalPrints = Integer.parseInt(args[0]);
 		int threads = Integer.parseInt(args[1]);
-		System.out.println("Printing Hello World " + numPrints +"x....");
+		System.out.println("Printing Hello World " + totalPrints +"x....");
 		long startTime = System.nanoTime();
 		
 		if(threads == 0) 
-			printWithNoThreads(numPrints);
+			printWithNoThreads(totalPrints);
 		
 		else {
-			int extra = numPrints%threads;
+			int extra = totalPrints%threads;
 			for(int i = 1; i <= threads; i++) {
-				int numPrints = numPrints / threads;
+				int numPrints = totalPrints / threads;
 				if (extra > 0) {
-					numprints++;
+					numPrints++;
 					extra--;
 				}
 				HelloWorld thread = new HelloWorld("Thread " + i, numPrints);
 				thread.start();
 			}
 		}
-		printResults(startTime, threads, numPrints);	
+		printResults(startTime, threads, totalPrints);	
 	}
 	
 	public static void printResults(long startTime, int threads, int numPrints) {
