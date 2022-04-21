@@ -5,38 +5,41 @@ import java.util.List;
 public class ThreadExample {
 
 	public static void main(String[] args) throws InterruptedException {
-		int numPrints = Integer.parseInt(args[0]);
+		int totalPrints = Integer.parseInt(args[0]);
 		int threads = Integer.parseInt(args[1]);
-		System.out.println("Printing Hello World " + numPrints +"x....");
+		System.out.println("Printing Hello World " + totalPrints +"x....");
 		long startTime = System.nanoTime();
 		
 		if(threads == 0) 
-			printWithNoThreads(numPrints);
+			printWithNoThreads(totalPrints);
 		
 		else {
-			int extra = numPrints%threads;
+			int extra = totalPrints%threads;
 			for(int i = 1; i <= threads; i++) {
-				int numPrints = numPrints / threads;
+				int numPrints = totalPrints / threads;
 				if (extra > 0) {
-					numprints++;
+					numPrints++;
 					extra--;
 				}
 				HelloWorld thread = new HelloWorld("Thread " + i, numPrints);
 				thread.start();
 			}
 		}
-		printResults(startTime, threads, numPrints);	
+		printResults(startTime, threads, totalPrints);	
 	}
 	
 	public static void printResults(long startTime, int threads, int numPrints) {
-		Runtime.getRuntime().addShutdownHook(new Thread() {
-			public void run() {
-				long endTime = System.nanoTime();
-				double elaspedTime = (double) (endTime - startTime) / 1_000_000_000;
-				String results = new DecimalFormat("0.00").format(elaspedTime);
-				System.out.println("Took " + threads + " threads " + results + " seconds to print " + numPrints + "x");
+		while (Thread.activeCount() > 1) {
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
 			}
-		});
+		}
+		long endTime = System.nanoTime();
+		double elaspedTime = (double) (endTime - startTime) / 1_000_000_000;
+		String results = new DecimalFormat("0.00").format(elaspedTime);
+		System.out.println("Took " + threads + " threads " + results + " seconds to print " + numPrints + "x");
 	}
 	public static void printWithNoThreads(int numPrints) throws InterruptedException {
 		for(int i = 0; i < numPrints; i++) {
