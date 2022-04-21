@@ -20,9 +20,9 @@ public class Dance extends Thread
 
     public static void main(String args[]) {
         new Dance("Dab").start();
-        new Dance("Wabble").start();
-        new Dance("earth").start();
-        new Dance("air").start();
+        new Dance("Wobble").start();
+        new Dance("Shuffle").start();
+        new Dance("Sprinkler").start();
         new Dance("Fik-shun").start();
     }
 }
