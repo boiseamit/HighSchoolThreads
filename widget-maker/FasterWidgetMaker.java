@@ -1,9 +1,7 @@
 import java.util.Random;
 
 /**
- * A simple program that simulates a widget factory. Each widget takes a
- * variable (random) amount of time to make. The student should convert this
- * program to be multithreaded and see how much faster it works.
+ * Runs the widgetmaker faster by using multiple threads.
  * 
  * @author amit
  * @author taylor
@@ -16,16 +14,25 @@ public class FasterWidgetMaker extends Thread
     private static final int INCORRECT_ARGUMENTS = 1;
     private int count;
 
+    /**
+     * @param count
+     */
     public FasterWidgetMaker(int count) {
         this.count = count;
     }
 
 
+    /**
+     * The main method for a thread. Just calls make.
+     */
     public void run() {
         make();
     }
 
 
+    /**
+     * Pretends to make widgets.
+     */
     public void make() {
         for (int i = 0; i < count; i++) {
             int time = generator.nextInt(RANGE) + BASE;
@@ -41,7 +48,8 @@ public class FasterWidgetMaker extends Thread
 
 
     /**
-     * @param args
+     * Creates the threads and then divide the work of making widgets amongst the threads.
+     * @param args  
      * @throws InterruptedException
      */
     public static void main(String[] args) throws InterruptedException {
@@ -71,7 +79,7 @@ public class FasterWidgetMaker extends Thread
         }
 
         long totalTime = System.currentTimeMillis() - startTime;
-        System.out.println("WidgetMaker: made " + n + " widgets in " + totalTime / 1000.0 + " seonds");
+        System.out.println("WidgetMaker: made " + n + " widgets in " + totalTime / 1000.0 + " seconds");
     }
 
 }

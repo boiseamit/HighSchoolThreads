@@ -48,8 +48,10 @@ public class WidgetMaker
         int n = Integer.parseInt(args[0]);
 
         long startTime = System.currentTimeMillis();
+        
         WidgetMaker robotFactory = new WidgetMaker(n);
         robotFactory.make();
+        
         long totalTime = System.currentTimeMillis() - startTime;
         System.out.println("WidgetMaker: made " + n + " widgets in " + totalTime / 1000.0 + " seconds");
     }
