@@ -32,6 +32,8 @@ public class Utility {
 
 	public void checkArgs(String[] args) {
 		try {
+			if (args.length < 1)
+				throw new IllegalArgumentException();
 			if (args.length > 3)
 				throw new IllegalArgumentException();
 
