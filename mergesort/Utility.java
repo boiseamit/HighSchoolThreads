@@ -1,5 +1,8 @@
+package mergesort;
+
 import java.text.DecimalFormat;
 import java.util.Random;
+
 
 public class Utility {
 	

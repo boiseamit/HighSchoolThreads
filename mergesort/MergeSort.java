@@ -1,3 +1,5 @@
+package mergesort;
+
 public class MergeSort {
 	private static int cutoffLevel;
 	private final static int DEFAULT_CUTOFF = 4;

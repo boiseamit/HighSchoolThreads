@@ -1,3 +1,4 @@
+package hellothreads;
 
 /**
  * Basic example of creating and running threads.

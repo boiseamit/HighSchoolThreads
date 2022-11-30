@@ -1,3 +1,5 @@
+package widgetmaker;
+
 import java.util.Random;
 
 /**
